@@ -4,7 +4,7 @@ import './globals.css'
 
 export const metadata: Metadata = {
   title: 'Barbearia DoGago | Cabelo, Barba e Estética na Zona Norte de SP',
-  description: 'Conheça a Barbearia DoGago na Zona Norte de São Paulo. Corte de cabelo, barba, estética masculina e Clube DoGago. Agende seu horário.',
+  description: 'Barbearia DoGago em Santana, Zona Norte de São Paulo. Conheça nossos serviços, o Clube DoGago e agende seu horário pelo WhatsApp.',
   generator: 'v0.app',
   openGraph: {
     title: 'Barbearia DoGago | Seu estilo. Nosso trabalho.',
