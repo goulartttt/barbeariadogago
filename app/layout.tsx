@@ -3,47 +3,35 @@ import type { Metadata, Viewport } from 'next'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'v0 App',
-  description: 'Created with v0',
+  title: 'Barbearia DoGago | Cabelo, Barba e Estética na Zona Norte de SP',
+  description: 'Conheça a Barbearia DoGago na Zona Norte de São Paulo. Corte de cabelo, barba, estética masculina e Clube DoGago. Agende seu horário.',
   generator: 'v0.app',
-  icons: {
-    icon: [
-      {
-        url: '/icon-light-32x32.png',
-        media: '(prefers-color-scheme: light)',
-      },
-      {
-        url: '/icon-dark-32x32.png',
-        media: '(prefers-color-scheme: dark)',
-      },
-      {
-        url: '/icon.svg',
-        type: 'image/svg+xml',
-      },
-    ],
-    apple: '/apple-icon.png',
+  openGraph: {
+    title: 'Barbearia DoGago | Seu estilo. Nosso trabalho.',
+    description: 'Cabelo, barba, conversa e amigos em Santana, São Paulo.',
+    type: 'website',
+    locale: 'pt_BR',
   },
+  icons: { icon: '/icon.svg' },
 }
 
 export const viewport: Viewport = {
-  colorScheme: 'light dark',
-  themeColor: [
-    { media: '(prefers-color-scheme: light)', color: 'white' },
-    { media: '(prefers-color-scheme: dark)', color: 'black' },
-  ],
+  colorScheme: 'dark',
+  themeColor: '#0c0c0c',
+  userScalable: true,
 }
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode
-}>) {
-  return (
-    <html lang="en">
-      <body className="antialiased">
-        {children}
-        {process.env.NODE_ENV === 'production' && <Analytics />}
-      </body>
-    </html>
-  )
+const localBusiness = {
+  '@context': 'https://schema.org',
+  '@type': 'Barbershop',
+  name: 'Barbearia DoGago',
+  telephone: '+55 11 94725-6071',
+  address: { '@type': 'PostalAddress', streetAddress: 'R. Conselheiro Moreira de Barros, 2511 - Loja 7', addressLocality: 'Santana', addressRegion: 'SP', postalCode: '02430-001', addressCountry: 'BR' },
+  areaServed: 'Zona Norte de São Paulo',
+  sameAs: ['https://www.instagram.com/barbearia_dogago/'],
+  aggregateRating: { '@type': 'AggregateRating', ratingValue: '5.0', bestRating: '5', ratingCount: '3' },
+}
+
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+  return <html lang="pt-BR" className="bg-background"><body className="antialiased"><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusiness) }} />{children}{process.env.NODE_ENV === 'production' && <Analytics />}</body></html>
 }
