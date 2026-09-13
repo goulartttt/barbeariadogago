@@ -1237,3 +1237,99 @@ body {
   left: auto;
   right: auto;
 }
+
+.arrow-icon {
+  display: block;
+  width: 18px;
+  height: 18px;
+  flex: 0 0 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.header-cta,
+.button,
+.text-link,
+.hero-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+}
+.header-cta .arrow-icon,
+.button .arrow-icon,
+.text-link .arrow-icon,
+.hero-secondary .arrow-icon {
+  transition: transform 0.3s ease;
+}
+.header-cta:hover .arrow-icon,
+.button:hover .arrow-icon,
+.text-link:hover .arrow-icon,
+.hero-secondary:hover .arrow-icon {
+  transform: translateX(3px);
+}
+.carousel {
+  display: grid;
+  grid-template-columns: 56px minmax(0, 1fr) 56px;
+  align-items: center;
+  column-gap: clamp(16px, 2.5vw, 36px);
+  overflow: visible;
+}
+.carousel > .carousel-arrow {
+  position: relative;
+  inset: auto;
+  z-index: 4;
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  margin: 0;
+}
+.carousel > .gallery-track,
+.carousel > .club-track {
+  grid-column: 2;
+  width: 100%;
+  margin: 0;
+}
+.carousel > .carousel-arrow.prev { grid-column: 1; grid-row: 1; }
+.carousel > .carousel-arrow.next { grid-column: 3; grid-row: 1; }
+.carousel > .carousel-arrow .arrow-icon,
+.review-carousel .carousel-arrow .arrow-icon {
+  width: 20px;
+  height: 20px;
+}
+.review-carousel {
+  display: grid;
+  grid-template-columns: 56px minmax(0, 1fr) 56px;
+  column-gap: clamp(16px, 2.5vw, 36px);
+  align-items: center;
+}
+.review-carousel > .carousel-arrow.prev { grid-column: 1; }
+.review-carousel > .review-viewport { grid-column: 2; }
+.review-carousel > .carousel-arrow.next { grid-column: 3; }
+@media (max-width: 760px) {
+  .carousel,
+  .review-carousel {
+    grid-template-columns: 38px minmax(0, 1fr) 38px;
+    column-gap: 10px;
+  }
+  .carousel > .carousel-arrow {
+    width: 36px;
+    height: 36px;
+  }
+  .carousel > .gallery-track,
+  .carousel > .club-track {
+    margin: 0;
+  }
+  .carousel > .carousel-arrow .arrow-icon,
+  .review-carousel .carousel-arrow .arrow-icon {
+    width: 18px;
+    height: 18px;
+  }
+  .review-carousel .carousel-arrow {
+    width: 36px;
+    height: 36px;
+    font-size: 0;
+  }
+}

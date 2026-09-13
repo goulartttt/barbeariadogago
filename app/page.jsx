@@ -122,6 +122,15 @@ const reviews = [
   ],
 ];
 
+function ArrowIcon({ direction = "right" }) {
+  const rotations = { right: 0, left: 180, down: 90 };
+  return (
+    <svg className="arrow-icon" viewBox="0 0 20 20" aria-hidden="true" style={{ transform: `rotate(${rotations[direction]}deg)` }}>
+      <path d="M3 10h13M11 5l5 5-5 5" />
+    </svg>
+  );
+}
+
 function Reveal({ children, className = "" }) {
   return <div className={`reveal ${className}`}>{children}</div>;
 }
@@ -214,7 +223,7 @@ export default function Page() {
           target="_blank"
           rel="noreferrer"
         >
-          AGENDAR <span>↗</span>
+          AGENDAR <ArrowIcon />
         </a>
         <button
           className="menu-toggle"
@@ -243,7 +252,7 @@ export default function Page() {
           </a>
         ))}
         <a className="button button-bronze" href={booking}>
-          AGENDAR HORÁRIO <span>↗</span>
+          AGENDAR HORÁRIO <ArrowIcon />
         </a>
       </div>
       <section id="inicio" className="hero">
@@ -264,10 +273,10 @@ export default function Page() {
               target="_blank"
               rel="noreferrer"
             >
-              AGENDAR HORÁRIO <span>↗</span>
+              AGENDAR HORÁRIO <ArrowIcon />
             </a>
             <a className="hero-secondary" href="#servicos">
-              CONHECER SERVIÇOS ↓
+              CONHECER SERVIÇOS <ArrowIcon direction="down" />
             </a>
           </Reveal>
         </div>
@@ -310,7 +319,7 @@ export default function Page() {
               target="_blank"
               rel="noreferrer"
             >
-              CONHECER <span>↗</span>
+              CONHECER <ArrowIcon />
             </a>
           </Reveal>
         </div>
@@ -348,7 +357,7 @@ export default function Page() {
           <Rows rows={extras} />
         </div>
         <a className="button button-bronze" href={booking}>
-          AGENDAR HORÁRIO <span>↗</span>
+          AGENDAR HORÁRIO <ArrowIcon />
         </a>
       </section>
       <section id="produtos" className="products section-pad">
@@ -402,7 +411,7 @@ export default function Page() {
             }
             aria-label="Print anterior"
           >
-            ←
+            <ArrowIcon direction="left" />
           </button>
           <div
             className="club-track gallery-track"
@@ -445,7 +454,7 @@ export default function Page() {
             onClick={() => setClubSlide((clubSlide + 1) % clubSlides.length)}
             aria-label="Próximo print"
           >
-            →
+            <ArrowIcon />
           </button>
         </div>
         <div className="carousel-meta">
@@ -460,7 +469,7 @@ export default function Page() {
           target="_blank"
           rel="noreferrer"
         >
-          QUERO CONHECER O CLUBE <span>↗</span>
+          QUERO CONHECER O CLUBE <ArrowIcon />
         </a>
       </section>
       <section id="galeria" className="gallery section-pad">
@@ -478,7 +487,7 @@ export default function Page() {
             onClick={prevSlide}
             aria-label="Imagem anterior"
           >
-            ←
+            <ArrowIcon direction="left" />
           </button>
           <div className="gallery-track">
             {gallery.map((image, index) => (
@@ -503,7 +512,7 @@ export default function Page() {
             onClick={nextSlide}
             aria-label="Próxima imagem"
           >
-            →
+            <ArrowIcon />
           </button>
         </div>
         <div className="carousel-meta">
@@ -532,7 +541,7 @@ export default function Page() {
             onClick={prevReview}
             aria-label="Avaliação anterior"
           >
-            ←
+            <ArrowIcon direction="left" />
           </button>
           <div
             className="review-viewport"
@@ -571,7 +580,7 @@ export default function Page() {
             onClick={nextReview}
             aria-label="Próxima avaliação"
           >
-            →
+            <ArrowIcon />
           </button>
         </div>
       </section>
@@ -599,7 +608,7 @@ export default function Page() {
               target="_blank"
               rel="noreferrer"
             >
-              COMO CHEGAR <span>↗</span>
+              COMO CHEGAR <ArrowIcon />
             </a>
           </div>
           <div className="map-card">
@@ -623,7 +632,7 @@ export default function Page() {
           <p>Agende seu horário com a Barbearia DoGago.</p>
         </Reveal>
         <a className="button button-bronze" href={booking}>
-          AGENDAR HORÁRIO <span>↗</span>
+          AGENDAR HORÁRIO <ArrowIcon />
         </a>
       </section>
       <footer>
