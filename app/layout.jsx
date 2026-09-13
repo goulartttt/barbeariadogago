@@ -1,8 +1,7 @@
 import { Analytics } from '@vercel/analytics/next'
-import type { Metadata, Viewport } from 'next'
 import './globals.css'
 
-export const metadata: Metadata = {
+export const metadata = {
   title: 'Barbearia DoGago | Barbearia contemporânea em Santana, São Paulo',
   description: 'Barbearia DoGago em Santana, Zona Norte de São Paulo. Conheça nossos serviços, o Clube DoGago e agende seu horário pelo WhatsApp.',
   generator: 'v0.app',
@@ -15,7 +14,7 @@ export const metadata: Metadata = {
   icons: { icon: '/icon.svg' },
 }
 
-export const viewport: Viewport = {
+export const viewport = {
   colorScheme: 'dark',
   themeColor: '#07152f',
   userScalable: true,
@@ -32,6 +31,6 @@ const localBusiness = {
   aggregateRating: { '@type': 'AggregateRating', ratingValue: '5.0', bestRating: '5', ratingCount: '3' },
 }
 
-export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+export default function RootLayout({ children }) {
   return <html lang="pt-BR" className="bg-background"><body className="antialiased"><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusiness) }} />{children}{process.env.NODE_ENV === 'production' && <Analytics />}</body></html>
 }
