@@ -14,7 +14,7 @@ export default function Page() {
     const onScroll = () => setScrolled(window.scrollY > 48);
     const onMove = (event) => {
       const target = event.target;
-      const interactive = target?.closest("a,button,.gallery-frame,.service-visual");
+      const interactive = target?.closest("a,button,.dogago-carousel__slide,.service-visual");
       const image = target?.closest(".gallery-frame,.service-visual");
       setCursor({ x: event.clientX, y: event.clientY, hover: Boolean(interactive), label: image ? "VIEW" : interactive ? "OPEN" : "" });
       setTilt({ x: (event.clientX / window.innerWidth - 0.5) * 8, y: (event.clientY / window.innerHeight - 0.5) * -6 });

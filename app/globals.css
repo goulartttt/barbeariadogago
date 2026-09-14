@@ -1846,3 +1846,89 @@ body {
 @media (prefers-reduced-motion: reduce) {
   .carousel-container { transition: none !important; }
 }
+
+/* Novo sistema independente: viewport clipping, controles dedicados e variantes por conteúdo. */
+.dogago-carousel {
+  display: grid;
+  grid-template-columns: 48px minmax(0, 1fr) 48px;
+  grid-template-rows: auto auto;
+  align-items: center;
+  gap: 18px clamp(12px, 2.5vw, 32px);
+  width: 100%;
+  margin-top: 70px;
+}
+.dogago-carousel__viewport {
+  grid-column: 2;
+  grid-row: 1;
+  min-width: 0;
+  width: 100%;
+  overflow: hidden;
+  outline: none;
+  touch-action: pan-y pinch-zoom;
+}
+.dogago-carousel__viewport:focus-visible {
+  box-shadow: 0 0 0 2px var(--bronze);
+}
+.dogago-carousel__container { display: flex; min-width: 0; }
+.dogago-carousel__slide { flex: 0 0 100%; min-width: 0; }
+.dogago-carousel__control {
+  grid-row: 1;
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border: 1px solid var(--bronze);
+  background: #0c0c0dcc;
+  color: var(--foreground);
+}
+.dogago-carousel__control--previous { grid-column: 1; }
+.dogago-carousel__control--next { grid-column: 3; }
+.dogago-carousel__control:focus-visible { outline: 2px solid var(--paper); outline-offset: 4px; }
+.dogago-carousel__status {
+  grid-column: 2;
+  grid-row: 2;
+  margin: 0;
+  color: var(--muted);
+  font: 10px "Courier New", monospace;
+  letter-spacing: .15em;
+  text-align: center;
+}
+.dogago-carousel--portrait .dogago-carousel__viewport {
+  width: min(100%, 360px);
+  height: min(72vh, 640px);
+  justify-self: center;
+  background: var(--coal);
+}
+.dogago-carousel--portrait .dogago-carousel__container,
+.dogago-carousel--portrait .dogago-carousel__slide { height: 100%; }
+.dogago-carousel--portrait .dogago-carousel__slide { display: grid; place-items: center; }
+.dogago-carousel--portrait img { display: block; width: 100%; height: 100%; object-fit: contain; }
+.dogago-carousel--gallery .dogago-carousel__viewport { height: min(55vw, 650px); }
+.dogago-carousel--gallery .dogago-carousel__container,
+.dogago-carousel--gallery .dogago-carousel__slide { height: 100%; }
+.dogago-carousel--gallery .dogago-carousel__slide > div { width: 100%; height: 100%; background-size: cover; background-position: center; }
+.dogago-carousel--gallery .dogago-carousel__slide > span { display: block; margin-top: 14px; color: var(--bronze); font: 10px "Courier New", monospace; letter-spacing: .15em; }
+.dogago-carousel--compact .dogago-carousel__viewport { max-width: 1080px; justify-self: center; }
+.dogago-carousel--compact .dogago-carousel__slide { flex-basis: 33.333%; padding: 0 8px; }
+.dogago-carousel--compact .dogago-carousel__container { margin: 0 -8px; }
+.dogago-carousel--compact .dogago-carousel__slide { padding: 0 8px; }
+.dogago-carousel--compact .dogago-carousel__slide > article { min-height: 240px; padding: 28px 24px 22px; display: flex; flex-direction: column; justify-content: space-between; }
+.dogago-carousel--compact .dogago-carousel__slide blockquote { margin: 16px 0 0; font-size: clamp(15px, 1vw, 18px); line-height: 1.45; }
+.dogago-carousel--compact .dogago-carousel__slide > article > p { margin: 20px 0 0; text-align: center; font: 11px "Courier New", monospace; }
+.dogago-carousel--compact .dogago-carousel__slide > article > p span { display: block; margin-top: 8px; color: var(--bronze); }
+@media (min-width: 761px) and (max-width: 1100px) {
+  .dogago-carousel--compact .dogago-carousel__slide { flex-basis: 50%; }
+}
+@media (max-width: 760px) {
+  .dogago-carousel { grid-template-columns: 34px minmax(0, 1fr) 34px; gap: 16px 8px; margin-top: 42px; }
+  .dogago-carousel__control { width: 34px; height: 34px; }
+  .dogago-carousel--portrait .dogago-carousel__viewport { width: min(78vw, 300px); height: min(126vw, 560px); }
+  .dogago-carousel--gallery .dogago-carousel__viewport { height: min(82vw, 520px); }
+  .dogago-carousel--compact .dogago-carousel__slide { flex-basis: 100%; padding: 0; }
+  .dogago-carousel--compact .dogago-carousel__container { margin: 0; }
+  .dogago-carousel--compact .dogago-carousel__slide > article { min-height: 238px; padding: 24px 20px 20px; }
+}
+@media (max-width: 430px) {
+  .dogago-carousel { grid-template-columns: 30px minmax(0, 1fr) 30px; column-gap: 5px; }
+  .dogago-carousel__control { width: 30px; height: 30px; }
+}
