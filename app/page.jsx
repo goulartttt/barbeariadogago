@@ -227,15 +227,17 @@ export default function Page() {
         </a>
         <button
           className="menu-toggle"
+          type="button"
           onClick={() => setMenuOpen(!menuOpen)}
-          aria-label="Abrir menu"
+          aria-label={menuOpen ? "Fechar menu" : "Abrir menu"}
+          aria-controls="mobile-navigation"
           aria-expanded={menuOpen}
         >
           <i />
           <i />
         </button>
       </header>
-      <div className={`mobile-menu ${menuOpen ? "open" : ""}`}>
+      <div id="mobile-navigation" className={`mobile-menu ${menuOpen ? "open" : ""}`}>
         <p className="eyebrow">BARBEARIA CONTEMPORÂNEA · SANTANA</p>
         {[
           ["início", "inicio"],
@@ -457,10 +459,9 @@ export default function Page() {
             <ArrowIcon />
           </button>
         </div>
-        <div className="carousel-meta">
+        <div className="carousel-meta" aria-live="polite">
           <span>
-            {String(clubSlide + 1).padStart(2, "0")} /{" "}
-            {String(clubSlides.length).padStart(2, "0")}
+            Slide {clubSlide + 1} de {clubSlides.length}
           </span>
         </div>
         <a
@@ -489,7 +490,18 @@ export default function Page() {
           >
             <ArrowIcon direction="left" />
           </button>
-          <div className="gallery-track">
+          <div
+            className="gallery-track"
+            onTouchStart={(event) => setTouchStart(event.touches[0].clientX)}
+            onTouchEnd={(event) => {
+              if (touchStart === null) return;
+              const distance = event.changedTouches[0].clientX - touchStart;
+              if (Math.abs(distance) > 45) (distance < 0 ? nextSlide : prevSlide)();
+              setTouchStart(null);
+            }}
+            role="region"
+            aria-label="Galeria de imagens da Barbearia DoGago"
+          >
             {gallery.map((image, index) => (
               <div
                 key={image}
@@ -515,10 +527,9 @@ export default function Page() {
             <ArrowIcon />
           </button>
         </div>
-        <div className="carousel-meta">
+        <div className="carousel-meta" aria-live="polite">
           <span>
-            {String(slide + 1).padStart(2, "0")} /{" "}
-            {String(gallery.length).padStart(2, "0")}
+            Imagem {slide + 1} de {gallery.length}
           </span>
         </div>
       </section>
@@ -545,6 +556,8 @@ export default function Page() {
           </button>
           <div
             className="review-viewport"
+            role="region"
+            aria-label="Avaliações de clientes"
             onTouchStart={(event) => setTouchStart(event.touches[0].clientX)}
             onTouchEnd={(event) => {
               if (touchStart === null) return;
