@@ -209,6 +209,7 @@ export default function Page() {
       <header className={`site-header ${scrolled ? "is-scrolled" : ""}`}>
         <a className="logo-lockup logo-image-lockup" href="#inicio">
           {dogagoLogo}
+          <i>SANTANA · SP</i>
         </a>
         <nav className="desktop-nav">
           <a href="#sobre">A CASA</a>
@@ -650,10 +651,11 @@ export default function Page() {
       </section>
       <footer>
         <div className="footer-bottom">
-          <a className="logo-lockup logo-image-lockup" href="#inicio">
-            {dogagoLogo}
-          </a>
-          <div>
+        <a className="logo-lockup logo-image-lockup" href="#inicio">
+          {dogagoLogo}
+          <i>SANTANA · SP</i>
+        </a>
+        <div>
             <p>@abarbeariadogago</p>
             <p>(11) 94725-6071</p>
             <p>
