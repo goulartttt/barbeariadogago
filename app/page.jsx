@@ -389,6 +389,7 @@ export default function Page() {
         </Reveal>
         <Carousel
           className="club-carousel"
+          variant="portrait"
           items={clubSlides.map((src, index) => ({ src, id: `clube-${index}` }))}
           label="Prints do Clube DoGago"
           previousLabel="Print anterior"
@@ -422,6 +423,7 @@ export default function Page() {
           </h2>
         </Reveal>
         <Carousel
+          variant="square"
           items={gallery.map((src, index) => ({
             src,
             id: `galeria-${index}`,
@@ -455,6 +457,7 @@ export default function Page() {
         </div>
         <Carousel
           className="review-carousel"
+          variant="testimonials"
           items={reviews.map(([name, text]) => ({ name, text, id: name }))}
           label="Avaliações de clientes"
           previousLabel="Avaliação anterior"

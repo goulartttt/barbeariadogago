@@ -15,6 +15,7 @@ export default function Carousel({
   viewportClassName = "",
   containerClassName = "",
   slideClassName = "",
+  variant = "default",
   options = {},
 }) {
   const [viewportRef, emblaApi] = useEmblaCarousel({ loop, ...options });
@@ -41,7 +42,7 @@ export default function Carousel({
 
   return (
     <section
-      className={`carousel carousel-shell ${className}`}
+      className={`carousel carousel-shell carousel-${variant} ${className}`}
       aria-roledescription="carrossel"
       aria-label={label}
     >
