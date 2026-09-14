@@ -37,12 +37,6 @@ const localBusiness = {
   },
   areaServed: "Zona Norte de São Paulo",
   sameAs: ["https://www.instagram.com/abarbeariadogago/"],
-  aggregateRating: {
-    "@type": "AggregateRating",
-    ratingValue: "5.0",
-    bestRating: "5",
-    ratingCount: "3",
-  },
 };
 
 export default function RootLayout({ children }) {

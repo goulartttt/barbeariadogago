@@ -122,6 +122,15 @@ const reviews = [
   ],
 ];
 
+function ArrowIcon({ direction = "right" }) {
+  const rotations = { right: 0, left: 180, down: 90 };
+  return (
+    <svg className="arrow-icon" viewBox="0 0 20 20" aria-hidden="true" style={{ transform: `rotate(${rotations[direction]}deg)` }}>
+      <path d="M3 10h13M11 5l5 5-5 5" />
+    </svg>
+  );
+}
+
 function Reveal({ children, className = "" }) {
   return <div className={`reveal ${className}`}>{children}</div>;
 }
@@ -200,6 +209,7 @@ export default function Page() {
       <header className={`site-header ${scrolled ? "is-scrolled" : ""}`}>
         <a className="logo-lockup logo-image-lockup" href="#inicio">
           {dogagoLogo}
+          <i>SANTANA · SP</i>
         </a>
         <nav className="desktop-nav">
           <a href="#sobre">A CASA</a>
@@ -214,19 +224,21 @@ export default function Page() {
           target="_blank"
           rel="noreferrer"
         >
-          AGENDAR <span>↗</span>
+          AGENDAR <ArrowIcon />
         </a>
         <button
           className="menu-toggle"
+          type="button"
           onClick={() => setMenuOpen(!menuOpen)}
-          aria-label="Abrir menu"
+          aria-label={menuOpen ? "Fechar menu" : "Abrir menu"}
+          aria-controls="mobile-navigation"
           aria-expanded={menuOpen}
         >
           <i />
           <i />
         </button>
       </header>
-      <div className={`mobile-menu ${menuOpen ? "open" : ""}`}>
+      <div id="mobile-navigation" className={`mobile-menu ${menuOpen ? "open" : ""}`}>
         <p className="eyebrow">BARBEARIA CONTEMPORÂNEA · SANTANA</p>
         {[
           ["início", "inicio"],
@@ -243,7 +255,7 @@ export default function Page() {
           </a>
         ))}
         <a className="button button-bronze" href={booking}>
-          AGENDAR HORÁRIO <span>↗</span>
+          AGENDAR HORÁRIO <ArrowIcon />
         </a>
       </div>
       <section id="inicio" className="hero">
@@ -264,10 +276,10 @@ export default function Page() {
               target="_blank"
               rel="noreferrer"
             >
-              AGENDAR HORÁRIO <span>↗</span>
+              AGENDAR HORÁRIO <ArrowIcon />
             </a>
             <a className="hero-secondary" href="#servicos">
-              CONHECER SERVIÇOS ↓
+              CONHECER SERVIÇOS <ArrowIcon direction="down" />
             </a>
           </Reveal>
         </div>
@@ -310,7 +322,7 @@ export default function Page() {
               target="_blank"
               rel="noreferrer"
             >
-              CONHECER <span>↗</span>
+              CONHECER <ArrowIcon />
             </a>
           </Reveal>
         </div>
@@ -348,7 +360,7 @@ export default function Page() {
           <Rows rows={extras} />
         </div>
         <a className="button button-bronze" href={booking}>
-          AGENDAR HORÁRIO <span>↗</span>
+          AGENDAR HORÁRIO <ArrowIcon />
         </a>
       </section>
       <section id="produtos" className="products section-pad">
@@ -402,7 +414,7 @@ export default function Page() {
             }
             aria-label="Print anterior"
           >
-            ←
+            <ArrowIcon direction="left" />
           </button>
           <div
             className="club-track gallery-track"
@@ -445,13 +457,12 @@ export default function Page() {
             onClick={() => setClubSlide((clubSlide + 1) % clubSlides.length)}
             aria-label="Próximo print"
           >
-            →
+            <ArrowIcon />
           </button>
         </div>
-        <div className="carousel-meta">
+        <div className="carousel-meta" aria-live="polite">
           <span>
-            {String(clubSlide + 1).padStart(2, "0")} /{" "}
-            {String(clubSlides.length).padStart(2, "0")}
+            Slide {clubSlide + 1} de {clubSlides.length}
           </span>
         </div>
         <a
@@ -460,7 +471,7 @@ export default function Page() {
           target="_blank"
           rel="noreferrer"
         >
-          QUERO CONHECER O CLUBE <span>↗</span>
+          QUERO CONHECER O CLUBE <ArrowIcon />
         </a>
       </section>
       <section id="galeria" className="gallery section-pad">
@@ -478,9 +489,20 @@ export default function Page() {
             onClick={prevSlide}
             aria-label="Imagem anterior"
           >
-            ←
+            <ArrowIcon direction="left" />
           </button>
-          <div className="gallery-track">
+          <div
+            className="gallery-track"
+            onTouchStart={(event) => setTouchStart(event.touches[0].clientX)}
+            onTouchEnd={(event) => {
+              if (touchStart === null) return;
+              const distance = event.changedTouches[0].clientX - touchStart;
+              if (Math.abs(distance) > 45) (distance < 0 ? nextSlide : prevSlide)();
+              setTouchStart(null);
+            }}
+            role="region"
+            aria-label="Galeria de imagens da Barbearia DoGago"
+          >
             {gallery.map((image, index) => (
               <div
                 key={image}
@@ -503,13 +525,12 @@ export default function Page() {
             onClick={nextSlide}
             aria-label="Próxima imagem"
           >
-            →
+            <ArrowIcon />
           </button>
         </div>
-        <div className="carousel-meta">
+        <div className="carousel-meta" aria-live="polite">
           <span>
-            {String(slide + 1).padStart(2, "0")} /{" "}
-            {String(gallery.length).padStart(2, "0")}
+            Imagem {slide + 1} de {gallery.length}
           </span>
         </div>
       </section>
@@ -532,10 +553,12 @@ export default function Page() {
             onClick={prevReview}
             aria-label="Avaliação anterior"
           >
-            ←
+            <ArrowIcon direction="left" />
           </button>
           <div
             className="review-viewport"
+            role="region"
+            aria-label="Avaliações de clientes"
             onTouchStart={(event) => setTouchStart(event.touches[0].clientX)}
             onTouchEnd={(event) => {
               if (touchStart === null) return;
@@ -571,7 +594,7 @@ export default function Page() {
             onClick={nextReview}
             aria-label="Próxima avaliação"
           >
-            →
+            <ArrowIcon />
           </button>
         </div>
       </section>
@@ -599,7 +622,7 @@ export default function Page() {
               target="_blank"
               rel="noreferrer"
             >
-              COMO CHEGAR <span>↗</span>
+              COMO CHEGAR <ArrowIcon />
             </a>
           </div>
           <div className="map-card">
@@ -623,15 +646,16 @@ export default function Page() {
           <p>Agende seu horário com a Barbearia DoGago.</p>
         </Reveal>
         <a className="button button-bronze" href={booking}>
-          AGENDAR HORÁRIO <span>↗</span>
+          AGENDAR HORÁRIO <ArrowIcon />
         </a>
       </section>
       <footer>
         <div className="footer-bottom">
-          <a className="logo-lockup logo-image-lockup" href="#inicio">
-            {dogagoLogo}
-          </a>
-          <div>
+        <a className="logo-lockup logo-image-lockup" href="#inicio">
+          {dogagoLogo}
+          <i>SANTANA · SP</i>
+        </a>
+        <div>
             <p>@abarbeariadogago</p>
             <p>(11) 94725-6071</p>
             <p>
