@@ -1,6 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Carousel from "@/components/Carousel";
+import { ArrowIcon } from "@/components/ArrowIcon";
 
 const wa = "https://wa.me/5511947256071";
 const booking = `${wa}?text=${encodeURIComponent(
@@ -122,15 +124,6 @@ const reviews = [
   ],
 ];
 
-function ArrowIcon({ direction = "right" }) {
-  const rotations = { right: 0, left: 180, down: 90 };
-  return (
-    <svg className="arrow-icon" viewBox="0 0 20 20" aria-hidden="true" style={{ transform: `rotate(${rotations[direction]}deg)` }}>
-      <path d="M3 10h13M11 5l5 5-5 5" />
-    </svg>
-  );
-}
-
 function Reveal({ children, className = "" }) {
   return <div className={`reveal ${className}`}>{children}</div>;
 }
@@ -152,10 +145,6 @@ export default function Page() {
   const [scrolled, setScrolled] = useState(false);
   const [cursor, setCursor] = useState({ x: 0, y: 0, hover: false, label: "" });
   const [tilt, setTilt] = useState({ x: 0, y: 0 });
-  const [slide, setSlide] = useState(0);
-  const [clubSlide, setClubSlide] = useState(0);
-  const [review, setReview] = useState(0);
-  const [touchStart, setTouchStart] = useState(null);
   useEffect(() => {
     const scroll = () => setScrolled(window.scrollY > 48);
     const move = (e) => {
@@ -190,12 +179,6 @@ export default function Page() {
       observer.disconnect();
     };
   }, []);
-  const nextSlide = () => setSlide((slide + 1) % gallery.length);
-  const prevSlide = () =>
-    setSlide((slide + gallery.length - 1) % gallery.length);
-  const nextReview = () => setReview((review + 1) % reviews.length);
-  const prevReview = () =>
-    setReview((review + reviews.length - 1) % reviews.length);
   return (
     <main>
       <div className="grain" aria-hidden="true" />
@@ -404,67 +387,22 @@ export default function Page() {
             </div>
           </div>
         </Reveal>
-        <div className="club-carousel carousel">
-          <button
-            className="carousel-arrow prev"
-            onClick={() =>
-              setClubSlide(
-                (clubSlide + clubSlides.length - 1) % clubSlides.length
-              )
-            }
-            aria-label="Print anterior"
-          >
-            <ArrowIcon direction="left" />
-          </button>
-          <div
-            className="club-track gallery-track"
-            onTouchStart={(event) => setTouchStart(event.touches[0].clientX)}
-            onTouchEnd={(event) => {
-              if (touchStart === null) return;
-              const distance = event.changedTouches[0].clientX - touchStart;
-              if (Math.abs(distance) > 45)
-                setClubSlide(
-                  (clubSlide + (distance < 0 ? 1 : clubSlides.length - 1)) %
-                    clubSlides.length
-                );
-              setTouchStart(null);
-            }}
-          >
-            {clubSlides.map((image, index) => (
-              <div
-                key={image}
-                className={`club-slide gallery-frame ${
-                  index === clubSlide ? "is-current" : ""
-                }`}
-                style={{
-                  transform: `translateX(calc(${(index - clubSlide) * 108}% + ${
-                    (index - clubSlide) * 24
-                  }px))`,
-                }}
-              >
-                <img
-                  src={image}
-                  alt={`Informações do Clube DoGago, slide ${index + 1} de ${
-                    clubSlides.length
-                  }`}
-                  draggable="false"
-                />
-              </div>
-            ))}
-          </div>
-          <button
-            className="carousel-arrow next"
-            onClick={() => setClubSlide((clubSlide + 1) % clubSlides.length)}
-            aria-label="Próximo print"
-          >
-            <ArrowIcon />
-          </button>
-        </div>
-        <div className="carousel-meta" aria-live="polite">
-          <span>
-            Slide {clubSlide + 1} de {clubSlides.length}
-          </span>
-        </div>
+        <Carousel
+          className="club-carousel"
+          items={clubSlides.map((src, index) => ({ src, id: `clube-${index}` }))}
+          label="Prints do Clube DoGago"
+          previousLabel="Print anterior"
+          nextLabel="Próximo print"
+          slideClassName="club-slide"
+          viewportClassName="club-track"
+          renderItem={(item, index) => (
+            <img
+              src={item.src}
+              alt={`Informações do Clube DoGago, slide ${index + 1} de ${clubSlides.length}`}
+              draggable="false"
+            />
+          )}
+        />
         <a
           className="button button-dark club-cta"
           href={clubLink}
@@ -483,56 +421,24 @@ export default function Page() {
             <span>SER VISTO.</span>
           </h2>
         </Reveal>
-        <div className="carousel">
-          <button
-            className="carousel-arrow prev"
-            onClick={prevSlide}
-            aria-label="Imagem anterior"
-          >
-            <ArrowIcon direction="left" />
-          </button>
-          <div
-            className="gallery-track"
-            onTouchStart={(event) => setTouchStart(event.touches[0].clientX)}
-            onTouchEnd={(event) => {
-              if (touchStart === null) return;
-              const distance = event.changedTouches[0].clientX - touchStart;
-              if (Math.abs(distance) > 45) (distance < 0 ? nextSlide : prevSlide)();
-              setTouchStart(null);
-            }}
-            role="region"
-            aria-label="Galeria de imagens da Barbearia DoGago"
-          >
-            {gallery.map((image, index) => (
-              <div
-                key={image}
-                className={`gallery-frame ${
-                  index === slide ? "is-current" : ""
-                }`}
-                style={{
-                  transform: `translateX(calc(${(index - slide) * 108}% + ${
-                    (index - slide) * 24
-                  }px))`,
-                }}
-              >
-                <div style={{ backgroundImage: `url(${image})` }} />
-                <span>{["CORTE", "BARBA", "DETALHES", "AMBIENTE"][index]}</span>
-              </div>
-            ))}
-          </div>
-          <button
-            className="carousel-arrow next"
-            onClick={nextSlide}
-            aria-label="Próxima imagem"
-          >
-            <ArrowIcon />
-          </button>
-        </div>
-        <div className="carousel-meta" aria-live="polite">
-          <span>
-            Imagem {slide + 1} de {gallery.length}
-          </span>
-        </div>
+        <Carousel
+          items={gallery.map((src, index) => ({
+            src,
+            id: `galeria-${index}`,
+            label: ["CORTE", "BARBA", "DETALHES", "AMBIENTE"][index],
+          }))}
+          label="Galeria de imagens da Barbearia DoGago"
+          previousLabel="Imagem anterior"
+          nextLabel="Próxima imagem"
+          slideClassName="gallery-frame"
+          viewportClassName="gallery-track"
+          renderItem={(item) => (
+            <>
+              <div style={{ backgroundImage: `url(${item.src})` }} />
+              <span>{item.label}</span>
+            </>
+          )}
+        />
       </section>
       <section id="quem-conhece" className="testimonials section-pad">
         <Reveal>
@@ -547,56 +453,28 @@ export default function Page() {
           <strong>5,0 ★</strong>
           <span>GOOGLE</span>
         </div>
-        <div className="review-carousel">
-          <button
-            className="carousel-arrow prev"
-            onClick={prevReview}
-            aria-label="Avaliação anterior"
-          >
-            <ArrowIcon direction="left" />
-          </button>
-          <div
-            className="review-viewport"
-            role="region"
-            aria-label="Avaliações de clientes"
-            onTouchStart={(event) => setTouchStart(event.touches[0].clientX)}
-            onTouchEnd={(event) => {
-              if (touchStart === null) return;
-              const distance = event.changedTouches[0].clientX - touchStart;
-              if (Math.abs(distance) > 45)
-                (distance < 0 ? nextReview : prevReview)();
-              setTouchStart(null);
-            }}
-          >
-            <div
-              className="review-track"
-              style={{
-                transform: `translateX(calc(-${review} * (var(--review-card) + var(--review-gap))))`,
-              }}
-            >
-              {reviews.map(([name, text]) => (
-                <article className="review-card" key={name}>
-                  <span className="review-mark">“</span>
-                  <div className="review-stars" aria-label="5 estrelas">
-                    ★★★★★
-                  </div>
-                  <blockquote>{text}</blockquote>
-                  <p>
-                    <strong>{name}</strong>
-                    <span>AVALIAÇÃO DE CLIENTE</span>
-                  </p>
-                </article>
-              ))}
-            </div>
-          </div>
-          <button
-            className="carousel-arrow next"
-            onClick={nextReview}
-            aria-label="Próxima avaliação"
-          >
-            <ArrowIcon />
-          </button>
-        </div>
+        <Carousel
+          className="review-carousel"
+          items={reviews.map(([name, text]) => ({ name, text, id: name }))}
+          label="Avaliações de clientes"
+          previousLabel="Avaliação anterior"
+          nextLabel="Próxima avaliação"
+          slideClassName="review-card"
+          viewportClassName="review-viewport"
+          renderItem={(item) => (
+            <article>
+              <span className="review-mark">“</span>
+              <div className="review-stars" aria-label="5 estrelas">
+                ★★★★★
+              </div>
+              <blockquote>{item.text}</blockquote>
+              <p>
+                <strong>{item.name}</strong>
+                <span>AVALIAÇÃO DE CLIENTE</span>
+              </p>
+            </article>
+          )}
+        />
       </section>
       <section id="onde-estamos" className="location section-pad">
         <Reveal>
