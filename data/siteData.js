@@ -1,4 +1,5 @@
 export const links = {
+  booking: "https://cashbarber.com.br/barbeariadogago/inicio/agendamento",
   whatsapp: "https://wa.me/5511947256071",
   maps: "https://www.google.com/maps/search/?api=1&query=R.%20Conselheiro%20Moreira%20de%20Barros%2C%202511%20-%20Loja%207%20-%20Santana%2C%20S%C3%A3o%20Paulo",
   instagram: "https://www.instagram.com/abarbeariadogago/",
@@ -6,7 +7,7 @@ export const links = {
 
 export const bookingText = "Olá! Vim pelo site da Barbearia DoGago e gostaria de agendar um horário.";
 export const clubText = "Olá! Vi o Clube DoGago no site e gostaria de saber mais sobre o plano de R$ 109,90.";
-export const booking = `${links.whatsapp}?text=${encodeURIComponent(bookingText)}`;
+export const booking = links.booking;
 export const clubLink = `${links.whatsapp}?text=${encodeURIComponent(clubText)}`;
 
 export const services = [
