@@ -1894,8 +1894,8 @@ body {
   text-align: center;
 }
 .dogago-carousel--portrait .dogago-carousel__viewport {
-  width: min(100%, 440px);
-  height: min(78vh, 700px);
+  width: min(100%, 520px);
+  height: min(82vh, 820px);
   justify-self: center;
   background: var(--coal);
 }
@@ -1916,7 +1916,8 @@ body {
 .dogago-carousel--compact .dogago-carousel__slide { flex-basis: 33.333%; padding: 0 8px; }
 .dogago-carousel--compact .dogago-carousel__container { margin: 0 -8px; }
 .dogago-carousel--compact .dogago-carousel__slide { padding: 0 8px; }
-.dogago-carousel--compact .dogago-carousel__slide > article { min-height: 240px; padding: 28px 24px 22px; display: flex; flex-direction: column; justify-content: space-between; background: var(--background); color: var(--paper); }
+.dogago-carousel--compact .dogago-carousel__slide { height: 352px; }
+.dogago-carousel--compact .dogago-carousel__slide > article { box-sizing: border-box; height: 100%; padding: 28px 24px 22px; display: flex; flex-direction: column; justify-content: space-between; overflow: hidden; background: var(--background); color: var(--paper); }
 .dogago-carousel--compact .dogago-carousel__slide:nth-child(3n + 2) > article { background: var(--bronze); color: var(--background); }
 .dogago-carousel--compact .dogago-carousel__slide:nth-child(3n) > article { background: var(--paper); color: var(--background); }
 .dogago-carousel--compact .dogago-carousel__slide blockquote { margin: 16px 0 0; font-size: clamp(15px, 1vw, 18px); line-height: 1.45; }
@@ -1930,11 +1931,12 @@ body {
 @media (max-width: 760px) {
   .dogago-carousel { grid-template-columns: 34px minmax(0, 1fr) 34px; gap: 16px 8px; margin-top: 42px; }
   .dogago-carousel__control { width: 34px; height: 34px; }
-  .dogago-carousel--portrait .dogago-carousel__viewport { width: min(78vw, 340px); height: min(138vw, 620px); }
+  .dogago-carousel--portrait .dogago-carousel__viewport { width: min(88vw, 380px); height: min(156vw, 690px); }
   .dogago-carousel--gallery .dogago-carousel__viewport { width: min(82vw, 520px); aspect-ratio: 1 / 1; height: auto; }
   .dogago-carousel--compact .dogago-carousel__slide { flex-basis: 100%; padding: 0; }
   .dogago-carousel--compact .dogago-carousel__container { margin: 0; }
-  .dogago-carousel--compact .dogago-carousel__slide > article { min-height: 238px; padding: 24px 20px 20px; }
+  .dogago-carousel--compact .dogago-carousel__slide { height: 318px; }
+  .dogago-carousel--compact .dogago-carousel__slide > article { height: 100%; padding: 24px 20px 20px; }
 }
 @media (max-width: 430px) {
   .dogago-carousel { grid-template-columns: 30px minmax(0, 1fr) 30px; column-gap: 5px; }
