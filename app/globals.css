@@ -1880,7 +1880,15 @@ body {
   border: 1px solid var(--bronze);
   background: #0c0c0dcc;
   color: var(--foreground);
+  position: relative;
+  z-index: 2;
 }
+.site-header .logo-lockup > i,
+.mobile-menu .eyebrow { display: none; }
+.footer-credit { text-align: center; width: 100%; }
+.dogago-carousel--portrait .dogago-carousel__viewport { max-width: 900px; }
+.dogago-carousel--portrait .dogago-carousel__slide { flex-basis: 50%; padding: 0 8px; }
+.dogago-carousel--portrait .dogago-carousel__container { margin: 0 -8px; }
 .dogago-carousel__control--previous { grid-column: 1; }
 .dogago-carousel__control--next { grid-column: 3; }
 .dogago-carousel__control:focus-visible { outline: 2px solid var(--paper); outline-offset: 4px; }
@@ -1931,7 +1939,9 @@ body {
 @media (max-width: 760px) {
   .dogago-carousel { grid-template-columns: 34px minmax(0, 1fr) 34px; gap: 16px 8px; margin-top: 42px; }
   .dogago-carousel__control { width: 34px; height: 34px; }
-  .dogago-carousel--portrait .dogago-carousel__viewport { width: min(88vw, 380px); height: min(156vw, 690px); }
+  .dogago-carousel--portrait .dogago-carousel__viewport { width: min(78vw, 340px); height: min(138vw, 620px); }
+  .dogago-carousel--portrait .dogago-carousel__slide { flex-basis: 100%; padding: 0; }
+  .dogago-carousel--portrait .dogago-carousel__container { margin: 0; }
   .dogago-carousel--gallery .dogago-carousel__viewport { width: min(82vw, 520px); aspect-ratio: 1 / 1; height: auto; }
   .dogago-carousel--compact .dogago-carousel__slide { flex-basis: 100%; padding: 0; }
   .dogago-carousel--compact .dogago-carousel__container { margin: 0; }
