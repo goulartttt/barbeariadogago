@@ -8,7 +8,7 @@ export const links = {
 export const bookingText = "Olá! Vim pelo site da Barbearia DoGago e gostaria de agendar um horário.";
 export const clubText = "Olá! Vi o Clube DoGago no site e gostaria de saber mais sobre o plano de R$ 109,90.";
 export const booking = links.booking;
-export const clubLink = `${links.whatsapp}?text=${encodeURIComponent(clubText)}`;
+export const clubLink = "https://cashbarber.com.br/barbeariadogago/inicio/plano";
 
 export const services = [
   ["Corte", "R$ 60,00"], ["Barba", "R$ 40,00"], ["Corte + Barba", "R$ 90,00"],
