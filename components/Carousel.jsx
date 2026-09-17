@@ -44,7 +44,7 @@ export default function Carousel({
       <div className="dogago-carousel__viewport" id={id} ref={viewportRef} tabIndex="0" role="region" aria-label={`${label}: slide ${selected + 1} de ${items.length}`}>
         <div className="dogago-carousel__container">
           {items.map((item, index) => (
-            <article className="dogago-carousel__slide" key={item.id ?? index} aria-roledescription="slide" aria-label={`${index + 1} de ${items.length}`}>
+            <article className={`dogago-carousel__slide dogago-carousel__slide--${index}`} key={item.id ?? index} aria-roledescription="slide" aria-label={`${index + 1} de ${items.length}`}>
               {renderItem(item, index, selected === index)}
             </article>
           ))}
@@ -53,7 +53,6 @@ export default function Carousel({
       <button className="dogago-carousel__control dogago-carousel__control--next" type="button" onClick={next} aria-label={nextLabel} aria-controls={id}>
         <ArrowIcon />
       </button>
-      <p className="dogago-carousel__status" aria-live="polite">{selected + 1} de {items.length}</p>
     </section>
   );
 }
