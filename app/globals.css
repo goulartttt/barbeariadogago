@@ -866,18 +866,21 @@ h2 em {
 .map-card {
   position: relative;
   min-height: 360px;
+  isolation: isolate;
   background: radial-gradient(circle at 60% 40%, #d0c8b9 0 2px, transparent 3px),
     linear-gradient(130deg, transparent 45%, #b8ae9e 46% 47%, transparent 48%),
     repeating-linear-gradient(20deg, #d9d2c5 0 2px, #cec6b8 2px 4px);
   overflow: hidden;
 }
 
-.map-card:after {
-  content: "";
-  position: absolute;
-  inset: 10%;
-  border: 1px solid #9f9585;
-  transform: rotate(-14deg);
+.map-card iframe {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 100%;
+  min-height: 360px;
+  border: 0;
+  filter: saturate(.9) contrast(.98);
 }
 
 .map-card span {
