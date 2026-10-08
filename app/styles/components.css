@@ -1,0 +1,667 @@
+/* Componentes compartilhados. */
+
+/* Rótulos em caixa alta (mesmo estilo dos posts da marca). */
+.kicker,
+.list-title,
+.button,
+.carousel__status,
+.site-nav a,
+.site-footer__title,
+.photo figcaption,
+.review figcaption,
+.services__photo figcaption {
+  font-family: var(--type-text);
+  font-size: var(--size-label);
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+/* Rótulo de seção com o ornamento de linha + losango da marca. */
+.kicker {
+  display: grid;
+  gap: 0.85rem;
+  justify-items: start;
+  margin-bottom: clamp(1.5rem, 3vw, 2.25rem);
+  color: var(--accent);
+  letter-spacing: 0.32em;
+}
+
+.kicker::after {
+  content: "";
+  width: 4.75rem;
+  height: 0.625rem;
+  background: currentColor;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 76 10'%3E%3Cpath d='M0 5h58' stroke='%23000' stroke-width='1.5'/%3E%3Cpath d='M68 0l5 5-5 5-5-5z'/%3E%3C/svg%3E") no-repeat center / contain;
+}
+
+/* Títulos de seção */
+h2,
+.hero__title,
+.demo-notice__title {
+  font-family: var(--type-display);
+  font-optical-sizing: auto;
+  font-variation-settings: "SOFT" 0;
+  font-weight: 700;
+  line-height: 0.94;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  text-wrap: balance;
+}
+
+h2 {
+  font-size: var(--size-title);
+}
+
+h2 em,
+.hero__title em {
+  font-style: italic;
+  font-weight: 500;
+  color: var(--accent);
+}
+
+.lead {
+  font-size: var(--size-lead);
+  font-weight: 500;
+  line-height: 1.4;
+  color: var(--text);
+}
+
+.section-heading {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: clamp(1.75rem, 4vw, 2.5rem);
+  align-items: end;
+}
+
+.section-heading__aside {
+  display: grid;
+  gap: 1.1rem;
+  justify-items: start;
+  max-width: 34rem;
+  color: var(--text-muted);
+}
+
+@media (min-width: 64rem) {
+  .section-heading {
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 0.8fr);
+    gap: 6vw;
+  }
+}
+
+/* Botões e links de ação */
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.85rem;
+  min-height: 3.25rem;
+  padding: 0 1.6rem;
+  border: 1px solid transparent;
+  transition:
+    background-color 0.25s ease,
+    color 0.25s ease,
+    border-color 0.25s ease,
+    translate 0.25s var(--ease-out);
+}
+
+.button .icon--arrow {
+  transition: translate 0.3s var(--ease-out);
+}
+
+.button:hover .icon--arrow {
+  translate: 0.2rem 0;
+}
+
+.button:hover .icon--down {
+  translate: 0 0.2rem;
+}
+
+.button:active {
+  translate: 0 1px;
+}
+
+.button--bronze {
+  background: var(--bronze);
+  color: var(--navy-900);
+}
+
+.button--bronze:hover {
+  background: var(--bronze-bright);
+}
+
+.button--line {
+  min-height: 2.75rem;
+  padding: 0;
+  background: transparent;
+  color: var(--text);
+  border-bottom-color: currentColor;
+}
+
+.button--line:hover {
+  color: var(--accent);
+}
+
+.icon {
+  width: 1.15rem;
+  height: 1.15rem;
+  flex: none;
+}
+
+.icon--arrow {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.icon--star {
+  fill: currentColor;
+}
+
+.stars {
+  display: inline-flex;
+  gap: 0.2rem;
+  color: var(--bronze);
+}
+
+.stars .icon {
+  width: 1rem;
+  height: 1rem;
+}
+
+/* Listas de preço com pontilhado de cardápio de barbearia */
+.list-title {
+  padding-bottom: 1rem;
+  margin-bottom: 0.5rem;
+  border-bottom: 1px solid var(--line);
+  color: var(--accent);
+}
+
+.price-list {
+  display: grid;
+  column-gap: 4rem;
+}
+
+@media (min-width: 48rem) {
+  .price-list--2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.price-list__row {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  padding: 0.85rem 0;
+}
+
+.price-list__name {
+  font-size: 1.0625rem;
+  font-weight: 500;
+}
+
+.price-list__leader {
+  flex: 1;
+  min-width: 1.5rem;
+  border-bottom: 2px dotted var(--line);
+  translate: 0 -0.3em;
+}
+
+.price-list__price {
+  color: var(--accent);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums lining-nums;
+  white-space: nowrap;
+}
+
+/* Carrossel */
+.carousel {
+  --slide: 86%;
+  --gap: 1rem;
+  display: grid;
+  gap: 1.5rem;
+  margin-top: clamp(2.5rem, 5vw, 4rem);
+}
+
+.carousel__viewport {
+  overflow: hidden;
+}
+
+.carousel__viewport:focus-visible {
+  outline-offset: 6px;
+}
+
+.carousel__track {
+  display: flex;
+  margin-left: calc(var(--gap) * -1);
+  touch-action: pan-y pinch-zoom;
+}
+
+.carousel__slide {
+  display: flex;
+  flex: 0 0 var(--slide);
+  min-width: 0;
+  padding-left: var(--gap);
+}
+
+.carousel__slide > * {
+  flex: 1;
+}
+
+.carousel__controls {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.carousel__status {
+  min-width: 4.5rem;
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.carousel__progress {
+  position: relative;
+  flex: 1;
+  height: 1px;
+  margin-right: 0.75rem;
+  background: var(--line);
+}
+
+.carousel__progress::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--accent);
+  transform-origin: left;
+  scale: var(--progress, 0) 1;
+  transition: scale 0.5s var(--ease-out);
+}
+
+.carousel__button {
+  display: grid;
+  place-items: center;
+  width: 3rem;
+  height: 3rem;
+  padding: 0;
+  border: 1px solid var(--accent);
+  background: transparent;
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+.carousel__button:hover {
+  background: var(--accent);
+  color: var(--navy-900);
+}
+
+.carousel--photos {
+  --gap: 1.25rem;
+}
+
+@media (min-width: 48rem) {
+  .carousel--photos {
+    --slide: 50%;
+  }
+
+  .carousel--reviews {
+    --slide: 50%;
+  }
+}
+
+@media (min-width: 64rem) {
+  .carousel--reviews {
+    --slide: 33.333%;
+    --gap: 1.25rem;
+  }
+
+}
+
+/* Cabeçalho */
+.site-header {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  height: var(--header-height);
+  padding-inline: var(--inline-space);
+  background: linear-gradient(rgb(5 15 34 / 0.75), rgb(5 15 34 / 0));
+}
+
+/* Fundo sólido que aparece ao rolar (só opacidade, sem recalcular layout). */
+.site-header::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: rgb(7 21 47 / 0.9);
+  backdrop-filter: blur(14px);
+  box-shadow: 0 1px 0 rgb(200 155 69 / 0.18), 0 12px 32px rgb(2 8 20 / 0.3);
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+
+.site-header.is-scrolled::before,
+.site-header.is-open::before {
+  opacity: 1;
+}
+
+.site-header.is-open::before {
+  background: var(--navy-900);
+  box-shadow: none;
+}
+
+.site-header__logo {
+  display: block;
+  margin-right: auto;
+}
+
+.site-header__logo .logo {
+  width: auto;
+  height: calc(var(--header-height) - 1.1rem);
+  transform-origin: left center;
+  transition: scale 0.35s var(--ease-out);
+}
+
+.site-header.is-scrolled .logo {
+  scale: 0.84;
+}
+
+.site-nav {
+  display: none;
+  margin-right: 1rem;
+}
+
+.site-nav ul {
+  display: flex;
+  gap: clamp(1.25rem, 2.2vw, 2.25rem);
+}
+
+.site-nav a {
+  position: relative;
+  display: inline-block;
+  padding-block: 0.75rem;
+  color: rgb(241 238 232 / 0.82);
+  transition: color 0.2s ease;
+}
+
+.site-nav a::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0.45rem;
+  height: 1px;
+  background: var(--bronze);
+  scale: 0 1;
+  transform-origin: right;
+  transition: scale 0.35s var(--ease-out);
+}
+
+.site-nav a:hover {
+  color: var(--text);
+}
+
+.site-nav a:hover::after {
+  scale: 1 1;
+  transform-origin: left;
+}
+
+.site-header__cta.button--line {
+  border-bottom-color: var(--bronze);
+}
+
+.menu-toggle {
+  display: grid;
+  place-content: center;
+  gap: 0.45rem;
+  width: 2.75rem;
+  height: 2.75rem;
+  margin-right: -0.6rem;
+  padding: 0;
+  border: 0;
+  background: none;
+}
+
+.menu-toggle i {
+  display: block;
+  width: 1.6rem;
+  height: 1.5px;
+  background: currentColor;
+  transition: translate 0.3s var(--ease-out), rotate 0.3s var(--ease-out);
+}
+
+.is-open .menu-toggle i:first-of-type {
+  translate: 0 0.3rem;
+  rotate: 45deg;
+}
+
+.is-open .menu-toggle i:last-of-type {
+  translate: 0 -0.3rem;
+  rotate: -45deg;
+}
+
+.mobile-menu {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2.5rem;
+  padding: calc(var(--header-height) + 1.5rem) var(--gutter) 2.5rem;
+  background: var(--navy-900);
+  overflow-y: auto;
+  animation: menu-in 0.45s var(--ease-out);
+}
+
+.mobile-menu[hidden] {
+  display: none;
+}
+
+.mobile-menu ul {
+  display: grid;
+}
+
+.mobile-menu li + li {
+  border-top: 1px solid var(--line);
+}
+
+.mobile-menu li a {
+  display: block;
+  padding: 0.7rem 0;
+  font-family: var(--type-display);
+  font-size: clamp(1.75rem, 1.2rem + 3vw, 2.5rem);
+  font-weight: 600;
+  line-height: 1.1;
+  text-transform: uppercase;
+}
+
+.mobile-menu li a:hover {
+  color: var(--bronze);
+}
+
+.mobile-menu .button {
+  align-self: flex-start;
+}
+
+@keyframes menu-in {
+  from {
+    opacity: 0;
+    translate: 0 -0.75rem;
+  }
+}
+
+@media (max-width: 23.99rem) {
+  .site-header__cta {
+    display: none;
+  }
+}
+
+@media (min-width: 64rem) {
+  .site-nav {
+    display: block;
+  }
+
+  .menu-toggle,
+  .mobile-menu {
+    display: none;
+  }
+}
+
+/* Selo fixo de portfólio: sempre visível, discreto e fora do caminho dos botões. */
+.portfolio-badge {
+  position: fixed;
+  right: 0.75rem;
+  bottom: 0.75rem;
+  z-index: 40;
+  margin: 0;
+  padding: 0.45rem 0.75rem;
+  border: 1px solid rgb(200 155 69 / 0.55);
+  background: rgb(5 15 34 / 0.88);
+  backdrop-filter: blur(8px);
+  color: var(--text);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  line-height: 1.2;
+  text-transform: uppercase;
+  pointer-events: none;
+}
+
+/* Aviso de demonstração: janela (dialog) e página de reserva */
+.demo-dialog {
+  width: min(100% - 2rem, 34rem);
+  max-height: calc(100dvh - 2rem);
+  padding: clamp(1.75rem, 5vw, 2.75rem);
+  border: 1px solid var(--bronze);
+  background: var(--navy-900);
+  color: var(--text);
+  box-shadow: 0 2rem 4rem rgb(0 0 0 / 0.5);
+}
+
+.demo-dialog::backdrop {
+  background: rgb(3 8 18 / 0.72);
+  backdrop-filter: blur(4px);
+}
+
+html:has(.demo-dialog[open]) {
+  overflow: hidden;
+}
+
+.demo-notice {
+  display: grid;
+  gap: 1rem;
+  justify-items: start;
+}
+
+.demo-notice .kicker {
+  margin-bottom: 0.25rem;
+}
+
+.demo-notice__title {
+  font-size: clamp(1.75rem, 1.4rem + 1.5vw, 2.25rem);
+  line-height: 1.05;
+}
+
+.demo-notice p:not(.kicker) {
+  color: var(--text-muted);
+}
+
+.demo-notice__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem 2rem;
+  margin-top: 0.75rem;
+}
+
+.demo-notice form {
+  margin: 0;
+}
+
+.demo-page {
+  display: grid;
+  place-items: center;
+  min-height: 100svh;
+}
+
+.demo-page .demo-notice {
+  max-width: 36rem;
+}
+
+/* Rodapé */
+.site-footer {
+  padding: clamp(4rem, 8vw, 6rem) var(--inline-space) 2rem;
+  background: var(--navy-950);
+  border-top: 1px solid rgb(200 155 69 / 0.2);
+  color: var(--text-muted);
+}
+
+.site-footer__grid {
+  display: grid;
+  gap: 3rem;
+}
+
+.site-footer__brand {
+  display: grid;
+  gap: 1.25rem;
+  justify-items: start;
+}
+
+.site-footer__brand .logo {
+  width: 10rem;
+}
+
+.site-footer__brand p {
+  font-family: var(--type-display);
+  font-size: 1.25rem;
+  font-style: italic;
+  color: var(--text);
+}
+
+.site-footer__title {
+  margin-bottom: 1.1rem;
+  color: var(--bronze);
+}
+
+.site-footer__contact,
+.site-footer__contact address {
+  display: grid;
+  align-content: start;
+  justify-items: start;
+  gap: 0.6rem;
+}
+
+.site-footer__contact .site-footer__title {
+  margin-bottom: 0.5rem;
+}
+
+.site-footer__nav ul {
+  display: grid;
+  grid-template-columns: repeat(2, max-content);
+  gap: 0.6rem 2.5rem;
+}
+
+.site-footer a {
+  transition: color 0.2s ease;
+}
+
+.site-footer a:hover {
+  color: var(--bronze);
+}
+
+.site-footer__credit {
+  margin-top: clamp(3rem, 6vw, 4.5rem);
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--line);
+  font-size: 0.875rem;
+}
+
+@media (min-width: 48rem) {
+  .site-footer__grid {
+    grid-template-columns: 1fr 1.2fr 1fr;
+  }
+}
