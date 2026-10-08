@@ -1,52 +1,53 @@
 import { Analytics } from "@vercel/analytics/next";
+import { Barlow, Fraunces } from "next/font/google";
+import { business } from "@/data/siteData";
+import { portfolioNotice, siteUrl } from "@/lib/site";
 import "./globals.css";
 
+// Fontes servidas pelo próprio site (sem requisição ao Google no navegador).
+const display = Fraunces({
+  subsets: ["latin"],
+  style: ["normal", "italic"],
+  axes: ["opsz", "SOFT"],
+  variable: "--font-display",
+  display: "swap",
+});
+
+const text = Barlow({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-text",
+  display: "swap",
+});
+
+// Projeto de portfólio: título e descrição deixam isso claro, e o site fica
+// fora dos buscadores (sem dados estruturados de empresa).
 export const metadata = {
-  title: "Barbearia DoGago | Barbearia contemporânea em Santana, São Paulo",
-  description:
-    "Barbearia DoGago em Santana, Zona Norte de São Paulo. Conheça nossos serviços, o Clube DoGago e agende seu horário pelo WhatsApp.",
-  generator: "v0.app",
+  metadataBase: new URL(siteUrl),
+  title: `${business.name} | Projeto conceito`,
+  description: portfolioNotice,
+  robots: { index: false, follow: false },
   openGraph: {
-    title: "Barbearia DoGago | Seu estilo. Nosso trabalho.",
-    description:
-      "Serviços, produtos e Clube DoGago em Santana, Zona Norte de São Paulo.",
+    title: `${business.name} | ${business.tagline}`,
+    description: portfolioNotice,
+    url: "/",
+    siteName: business.name,
     type: "website",
     locale: "pt_BR",
   },
-  icons: { icon: "/icon.svg" },
+  twitter: { card: "summary_large_image" },
 };
 
 export const viewport = {
   colorScheme: "dark",
   themeColor: "#07152f",
-  userScalable: true,
-};
-
-const localBusiness = {
-  "@context": "https://schema.org",
-  "@type": "Barbershop",
-  name: "Barbearia DoGago",
-  telephone: "+55 11 94725-6071",
-  address: {
-    "@type": "PostalAddress",
-    streetAddress: "R. Conselheiro Moreira de Barros, 2511 - Loja 7",
-    addressLocality: "Santana",
-    addressRegion: "SP",
-    postalCode: "02430-001",
-    addressCountry: "BR",
-  },
-  areaServed: "Zona Norte de São Paulo",
-  sameAs: ["https://www.instagram.com/abarbeariadogago/"],
 };
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="pt-BR" className="bg-background">
-      <body className="antialiased">
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusiness) }}
-        />
+    <html lang="pt-BR" className={`${display.variable} ${text.variable}`}>
+      <body>
+        <a className="skip-link" href="#conteudo">Pular para o conteúdo</a>
         {children}
         {process.env.NODE_ENV === "production" && <Analytics />}
       </body>

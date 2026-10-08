@@ -1,0 +1,47 @@
+/* Tokens do design: cores, tipografia, espaços e movimento. */
+:root {
+  /* Cores da marca */
+  --navy-950: #050f22;
+  --navy-900: #07152f;
+  --navy-800: #102951;
+  --navy-700: #163060;
+  --ink: #11100f;
+  --ink-raised: #1b1a18;
+  --paper: #e9e4da;
+  --paper-deep: #ddd5c7;
+  --bronze: #c89b45;
+  --bronze-bright: #dbb267;
+  --bronze-ink: #7d5a1f; /* bronze legível sobre o papel (AA) */
+
+  /* Papéis de cor (trocados por seção) */
+  --surface: var(--navy-900);
+  --text: #f1eee8;
+  --text-muted: #b9c1cf;
+  --accent: var(--bronze);
+  --line: rgb(241 238 232 / 0.16);
+  --focus: var(--bronze-bright);
+
+  /* Tipografia (--font-display e --font-text vêm do next/font no layout) */
+  --type-display: var(--font-display), Georgia, "Times New Roman", serif;
+  --type-text: var(--font-text), "Segoe UI", system-ui, sans-serif;
+  --size-hero: clamp(3.1rem, 1.4rem + 7.4vw, 7.6rem);
+  --size-title: clamp(2.6rem, 1.5rem + 5vw, 6rem);
+  --size-lead: clamp(1.2rem, 1.05rem + 0.6vw, 1.5rem);
+  --size-body: 1.0625rem;
+  --size-label: 0.8125rem;
+
+  /* Espaços e layout */
+  --gutter: clamp(1.25rem, 5vw, 5.5rem);
+  --content: 82rem;
+  --section-space: clamp(5rem, 3rem + 8vw, 10rem);
+  --header-height: 4.75rem;
+
+  /* Movimento */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@media (min-width: 64rem) {
+  :root {
+    --header-height: 5.25rem;
+  }
+}
